@@ -7,18 +7,30 @@
 ## Back End Technolog : NodeJS
 ## Database : MySQL
 ## API's Created : 
-### /signup-used to create a new user account in DB
-### /login-used to check whether the respective user credentials is existing in the database or not
-### /book-fetch all the book details
-### /createbook-to create a new book data in DB
-### /updatebook/:book_id-used to check whether the specific parameter book id is existing or not, if existing this will allow you to modify the specified book details
-### /deletebook/:book_id-used to check whether the specific parameter book id is existing or not, if existing this will allow you to delete the specified book from the table in DB
-### /member-used to fetch all the user details from DB
-### /createmember-used to create a new member by admin and check whether the user is existing or not, if existing then will through an alert
-### /updatemember/:member_id-used to check whether the specific parameter member id is existing or not, if existing this will allow you to modify the specified member details
-### /deletemember/:member_id-used to check whether the specific parameter member id is existing or not, if existing this will allow you to delete the specified member from the table in DB
-### /transaction-this API will list out the entire transaction history
-### /issuebook-this will make sure that a person debt should not hold more than 500, if it is so then it will through an alert to the user. 
+### /signup 
+#### used to create a new user account in DB
+### /login
+#### used to check whether the respective user credentials is existing in the database or not
+### /book
+#### fetch all the book details
+### /createbook
+#### to create a new book data in DB
+### /updatebook/:book_id
+#### used to check whether the specific parameter book id is existing or not, if existing this will allow you to modify the specified book details
+### /deletebook/:book_id
+#### used to check whether the specific parameter book id is existing or not, if existing this will allow you to delete the specified book from the table in DB
+### /member
+#### used to fetch all the user details from DB
+### /createmember
+#### used to create a new member by admin and check whether the user is existing or not, if existing then will through an alert
+### /updatemember/:member_id
+#### used to check whether the specific parameter member id is existing or not, if existing this will allow you to modify the specified member details
+### /deletemember/:member_id
+#### used to check whether the specific parameter member id is existing or not, if existing this will allow you to delete the specified member from the table in DB
+### /transaction
+#### this API will list out the entire transaction history
+### /issuebook
+#### this will make sure that a person debt should not hold more than 500, if it is so then it will through an alert to the user. 
 
 
 ## Screenshots : 
