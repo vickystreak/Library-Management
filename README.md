@@ -6,6 +6,20 @@
 ## Front End Technology : ReactJS
 ## Back End Technolog : NodeJS
 ## Database : MySQL
+## API's Created : 
+### /signup
+### /login 
+### /book
+### /createbook
+### /updatebook/:book_id
+### /deletebook/:book_id
+### /member
+### /createmember
+### /updatemember/:member_id
+### /deletemember/:member_id
+### /transaction
+### /issuebook
+
 
 ## Screenshots : 
 ![Screenshot 2023-08-23 140404](https://github.com/vickystreak/Library-Management/assets/82258418/7ac6d95a-3250-4043-82e2-02c9eb4c1cf6)
