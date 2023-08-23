@@ -30,10 +30,9 @@ add.post("/signup", (req, res) => {
   try {
     try {
       console.log(req.body);
+      // first we need to need check if the person is already existed in database or not
       let userCount = "select count(*) as count from admin where username = ?";
       con.query(userCount, [req.body.email], (error, result) => {
-        // console.log(result[0].count);
-        // console.log(error);
         if (error) {
           res.send(error);
         } else {
@@ -131,18 +130,255 @@ add.post("/login", (req, res) => {
   }
 });
 
-add.get('/getDashboardInfo/:adminId', (req, res) => {
-    try {
-        let msg ={
-            code:200,
-            message:"Successfully Fetched!"
-        }
-        res.send(msg);
-    } catch(error) {
-        console.log(error)
-    }
-})
+add.get("/book", (req, res) => {
+  try {
+    let bookCountQuery = "select * from books";
+    con.query(bookCountQuery, (getError, getResult) => {
+      if (getError) {
+        res.send(getError);
+      } else {
+        return res.json(getResult);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
 
+add.post("/createbook", (req, res) => {
+  try {
+    let insertBookQuery =
+      "INSERT INTO books (title, author, stock_qty, rent_fee) VALUES (?,?,?,?)";
+    con.query(
+      insertBookQuery,
+      [req.body.title, req.body.author, req.body.quantity, req.body.rent],
+      (getError, getResult) => {
+        if (getError) {
+          res.send(getError);
+        } else {
+          let msg = {
+            code: 200,
+            message: "Successfully Created",
+          };
+          res.send(msg);
+        }
+      }
+    );
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.put("/updatebook/:book_id", (req, res) => {
+  try {
+    let bookid = req.params.book_id;
+    let updateBookQuery =
+      "UPDATE books SET title = ? ,author = ?,stock_qty = ?,rent_fee = ? WHERE book_id = ?";
+    con.query(
+      updateBookQuery,
+      [
+        req.body.title,
+        req.body.author,
+        req.body.quantity,
+        req.body.rent,
+        bookid,
+      ],
+      (getError, getResult) => {
+        if (getError) {
+          res.send(getError);
+        } else {
+          let msg = {
+            code: 200,
+            message: "Successfully Updated",
+          };
+          res.send(msg);
+        }
+      }
+    );
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.delete("/deletebook/:book_id", (req, res) => {
+  try {
+    let bookid = req.params.book_id;
+    let deleteBookQuery = "DELETE FROM books WHERE book_id = ?";
+    con.query(deleteBookQuery, [bookid], (getError, getResult) => {
+      if (getError) {
+        res.send(getError);
+      } else {
+        let msg = {
+          code: 200,
+          message: "Successfully Deleted",
+        };
+        res.send(msg);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.get("/getDashboardInfo/:adminId", (req, res) => {
+  try {
+    let msg = {
+      code: 200,
+      message: "Successfully Fetched!",
+    };
+    res.send(msg);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+add.get("/member", (req, res) => {
+  try {
+    let userMemberCount = "SELECT * FROM librarydata.members";
+    con.query(userMemberCount, (getError, getResult) => {
+      if (getError) {
+        res.send(getError);
+      } else {
+        return res.json(getResult);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.post("/createmember", (req, res) => {
+  try {
+    let userCount =
+      "INSERT INTO members (first_name,last_name,email,phone_number,outstanding_debt) VALUES (?,?,?,?,?)";
+    con.query(
+      userCount,
+      [
+        req.body.fname,
+        req.body.lname,
+        req.body.email,
+        req.body.pno,
+        req.body.debt,
+      ],
+      (getError, getResult) => {
+        if (getError) {
+          res.send(getError);
+        } else {
+          let msg = {
+            code: 200,
+            message: "Successfully Created",
+          };
+          res.send(msg);
+        }
+      }
+    );
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.put("/updatemember/:member_id", (req, res) => {
+  try {
+    let memberid = req.params.member_id;
+    let updateQuery =
+      "UPDATE members SET first_name = ? ,last_name = ?,email = ?,phone_number = ?,outstanding_debt = ? WHERE member_id = ?";
+    con.query(
+      updateQuery,
+      [
+        req.body.fname,
+        req.body.lname,
+        req.body.email,
+        req.body.pno,
+        req.body.debt,
+        memberid,
+      ],
+      (getError, getResult) => {
+        if (getError) {
+          res.send(getError);
+        } else {
+          let msg = {
+            code: 200,
+            message: "Successfully Updated",
+          };
+          res.send(msg);
+        }
+      }
+    );
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.delete("/deletemember/:member_id", (req, res) => {
+  try {
+    let memberid = req.params.member_id;
+    let deleteQuery = "DELETE FROM members WHERE member_id = ?";
+    con.query(deleteQuery, [memberid], (getError, getResult) => {
+      if (getError) {
+        res.send(getError);
+      } else {
+        let msg = {
+          code: 200,
+          message: "Successfully Deleted",
+        };
+        res.send(msg);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.get("/transaction", (req, res) => {
+  try {
+    let userCount = "SELECT * FROM librarydata.transactions;";
+    con.query(userCount, (getError, getResult) => {
+      if (getError) {
+        res.send(getError);
+      } else {
+        return res.json(getResult);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
+
+add.post("/issuebook", (req, res) => {
+  try {
+    let check =
+      "SELECT count(*) as count FROM members WHERE member_id = ?   AND outstanding_debt <= 500";
+    con.query(check, [req.body.memberid], (err, result) => {
+      if (result[0].count > 0) {
+        let insertQuery =
+          "INSERT INTO transactions(book_id,member_id,transaction_date,due_date,status) VALUES(?,?,current_date(),?,'borrowed')";
+        con.query(
+          insertQuery,
+          [req.body.bookid, req.body.memberid, req.body.duedate],
+          (err, result) => {
+            if (err) {
+              res.send(err);
+            } else {
+              let msg = {
+                code: 200,
+                message: "Book had been Successfully Issed",
+              };
+              res.send(msg);
+            }
+          }
+        );
+      } else {
+        let msg = {
+          code: 200,
+          message: "Unable to Issue Book Member Outstanding is more than 500",
+        };
+        res.send(msg);
+      }
+    });
+  } catch (systemError) {
+    console.log(systemError);
+  }
+});
 
 add.listen(3013, () => {
   console.log("Running on port 3013");

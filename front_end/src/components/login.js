@@ -63,7 +63,7 @@ function Login() {
       <div className="loginMain d-flex justify-content-center align-items-center bg-dark vh-100">
         <div className="bg-white p-3 rounded w-25">
           <form onSubmit={handleSubmit}>
-            <h2 className="mb-3">Log In</h2>
+            <h2 className="mb-3 text-center ">Log In</h2>
             <div className="mb-3">
               <strong>
                 <label htmlFor="email">Email</label>
